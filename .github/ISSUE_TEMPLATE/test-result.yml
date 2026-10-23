@@ -59,6 +59,7 @@ body:
         - "CareAgents (FHIR IQ, fhir-iq-careagents)"
         - "Flexpa Health Wallet (Flexpa, flexpa)"
         - "haau3 Web Wallet (haau3, haau3)"
+        - "MyDigiRecords Health Wallet (Android) (MyDigiRecords, mydigirecords-mydigirecords-health-wallet-android)"
         - "MyDigiRecords Health Wallet (MyDigiRecords, mydigirecords-health-wallet)"
         - "SMART reference Android wallet (SMART Health IT, smart-android-wallet)"
         - "SMART Testing Wallet (SMART Health IT, smart-testing-wallet)"
