@@ -1,1 +1,48 @@
-{"organization":"MyDigiRecords","homepage":"https://mydigirecords.ai","contacts":[{"name":"Nirmal Kotiyal","github":"NirmalKotiyal","slack":"Nirmal Kotiyal","email":"nirmal@mydigirecords.com"},{"name":"Rahul","github":"Rahulp1888","slack":"Rahul","email":"rahul@mydigirecords.com"}],"components":[{"id":"mydigirecords-health-wallet","role":"web-wallet","name":"MyDigiRecords Health Wallet","description":"A patient wallet built by MyDigiRecords: US Core records, an insurance card, and interactive check-in forms. Renders questionnaires and SMART Health Cards. Test patient: Emily Carter, born 1988, with problems, allergies, medications, immunizations, observations, procedures, and an insurance card. From MyDigiRecords.","status":"up","walletUrl":"https://dev-mdr.mydigirecords.com/v1/auth-mydig/api/health-wallet.html","iconUrl":"https://mydigirecords.ai/wp-content/uploads/2024/12/Untitled-design3.png","target":"tab","testPatient":"Emily Carter, born 1988, with problems, allergies, medications, immunizations, observations, procedures, and an insurance card","notes":"Use the Try with demo account button to instantly launch the wallet and select which records you want to share.","homepage":"https://mydigirecords.ai/"}]}
+{
+  "organization": "MyDigiRecords",
+  "homepage": "https://mydigirecords.ai",
+  "contacts": [
+    {
+      "name": "Nirmal Kotiyal",
+      "github": "NirmalKotiyal",
+      "slack": "Nirmal Kotiyal",
+      "email": "nirmal@mydigirecords.com"
+    },
+    {
+      "name": "Rahul",
+      "github": "Rahulp1888",
+      "slack": "Rahul",
+      "email": "rahul@mydigirecords.com"
+    }
+  ],
+  "components": [
+    {
+      "id": "mydigirecords-health-wallet",
+      "role": "web-wallet",
+      "name": "MyDigiRecords Health Wallet",
+      "description": "A patient wallet built by MyDigiRecords: US Core records, an insurance card, and interactive check-in forms. Renders questionnaires and SMART Health Cards. Test patient: Emily Carter, born 1988, with problems, allergies, medications, immunizations, observations, procedures, and an insurance card. From MyDigiRecords.",
+      "status": "up",
+      "walletUrl": "https://dev-mdr.mydigirecords.com/v1/auth-mydig/api/health-wallet.html",
+      "iconUrl": "https://mydigirecords.ai/wp-content/uploads/2024/12/Untitled-design3.png",
+      "target": "tab",
+      "testPatient": "Emily Carter, born 1988, with problems, allergies, medications, immunizations, observations, procedures, and an insurance card",
+      "notes": "Use the Try with demo account button to instantly launch the wallet and select which records you want to share.",
+      "homepage": "https://mydigirecords.ai/"
+    },
+    {
+      "id": "mydigirecords-mydigirecords-health-wallet-android",
+      "role": "native-wallet",
+      "name": "MyDigiRecords Health Wallet (Android)",
+      "status": "up",
+      "platforms": [
+        "android"
+      ],
+      "access": "install",
+      "description": "MyDigiRecords native Android health wallet for SMART Health Check-in, enabling patients to access their health information and share relevant records for check-in.",
+      "installUrl": "https://drive.google.com/file/d/1qlO014WwOTEIkDa-PvZR8KQQqW-o2fYU/view",
+      "testPatient": "Emily Carter, born 1988 — synthetic test patient.",
+      "notes": "1. Install and open the MyDigiRecords Health Wallet app.\n2. Accept the Terms and Conditions.\n3. On the login screen, tap **Try with demo account** to automatically sign in to the demo user.\n4. Once signed in, initiate the **EHR-initiated check-in flow** to test the SMART Health Check-in experience.\n\nUse the demo account and synthetic patient data for testing.",
+      "requirements": "Android 10 or later with Chrome 141 or later"
+    }
+  ]
+}
