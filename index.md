@@ -52,6 +52,7 @@ Record each run through the [result form](https://github.com/smart-health-checki
 | A Verifier to test wallets with | [SMART Testing EHR](testing-ehr/) |
 | A web wallet to test Verifiers with | [SMART Testing Wallet](testing-wallet/) ([what it does](https://github.com/smart-health-checkin/connectathon/blob/main/testing-wallet/FEATURES.md)) |
 | A native wallet for Android | [Reference Android wallet](#reference-android-wallet) |
+| Code for a native wallet on iOS | [iOS wallet kit](https://github.com/smart-health-checkin/ios-wallet-kit), a Swift framework for the Identity Document Provider extension |
 | A working check-in page | [Clinic check-in demo](https://smart-health-checkin.org/client/demo/), also [with the event registry](https://smart-health-checkin.org/client/demo/#wallets=https%3A%2F%2Fsmart-health-checkin.org%2Fconnectathon%2Fwallets.json) |
 | How web wallets talk to a Verifier page | [Web wallets](https://smart-health-checkin.org/client/docs/web-wallets.html) in the client docs |
 
