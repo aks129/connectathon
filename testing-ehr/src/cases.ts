@@ -21,7 +21,7 @@ export type Expectation = (
 );
 
 /** How the scenario blocks and the Testing EHR label a step check. */
-export const STEP_DONE = "the step was done";
+export const STEP_DONE = "checks the case's step";
 
 /** A spec requirement's address, from its id. */
 export const ruleHref = (rule: string): string => `https://smart-health-checkin.org/spec/#${rule}`;

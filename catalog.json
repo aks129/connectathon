@@ -83,7 +83,8 @@
           "check": "status",
           "item": "phq2",
           "status": [
-            "fulfilled"
+            "fulfilled",
+            "partial"
           ],
           "basis": "step"
         }
@@ -261,6 +262,7 @@
           "item": "gad7",
           "status": [
             "fulfilled",
+            "partial",
             "unsupported",
             "error"
           ],
@@ -295,7 +297,8 @@
           "check": "status",
           "item": "phq2",
           "status": [
-            "fulfilled"
+            "fulfilled",
+            "partial"
           ],
           "basis": "step"
         }
@@ -325,7 +328,8 @@
           "check": "status",
           "item": "semaglutide",
           "status": [
-            "fulfilled"
+            "fulfilled",
+            "partial"
           ],
           "basis": "step"
         }
@@ -550,7 +554,8 @@
           "check": "status",
           "item": "semaglutide",
           "status": [
-            "fulfilled"
+            "fulfilled",
+            "partial"
           ],
           "basis": "step"
         }
