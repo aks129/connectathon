@@ -500,6 +500,8 @@ function send() {
   void run({ request, label: r.label, caseId: r.caseId, wallet, session });
 }
 
+const EMPTY_RESULT = "Pick what to send and a wallet, then Send. The verdict, failing checks, and what came back will show here.";
+
 // The SMART starburst, as <smart-checkin-picker> shows it while waiting.
 const STARBURST = `<svg viewBox="59 -1 91 75" aria-hidden="true" focusable="false"><polygon fill="#722772" points="83.91 0 93.42 0 104.56 18.47 116.03 0 125.28 0 104.58 33.96"/><polygon fill="#e24a31" points="60.61 35.72 65.37 28.16 87.76 28.16 76.67 9.49 81.3 1.87 101.89 35.72"/><polygon fill="#e77d26" points="128 1.73 132.76 9.55 121.5 28.16 144.06 28.16 148.69 35.72 107.4 35.72"/><polygon fill="#89bf44" points="148.72 38.78 143.97 46.33 121.57 46.33 132.66 65.16 128.03 72.78 107.44 38.78"/><polygon fill="#f1b42a" points="81.28 72.77 76.53 64.94 87.78 46.33 65.23 46.33 60.6 38.78 101.89 38.78"/><polygon fill="#64aed0" points="125.46 73.22 115.89 73.22 104.68 54.63 93.14 73.22 83.82 73.22 104.66 39.04"/></svg>`;
 
@@ -602,12 +604,23 @@ function noResponse(e: Error): string | undefined {
   return undefined;
 }
 
+/** Back to the empty result, ready to set up the next test; the run stays in History. */
+function clearResult() {
+  showing = undefined;
+  $("status").textContent = "";
+  $("result").innerHTML = `<div class="empty">${EMPTY_RESULT}</div>`;
+  $("log").textContent = "";
+  renderHistory();
+  document.querySelector(".setup-col")?.scrollIntoView({ block: "start" });
+}
+
 /** A run that ended without a response: one line, and Send again. */
 function showNothing(reason: string, log: string) {
   showing = undefined;
   $("status").textContent = `Nothing was shared: ${reason}`;
-  $("result").innerHTML = `<div class="ended"><p>Nothing was shared: ${esc(reason)}</p><button type="button" id="send-again" class="smart-btn sm primary">Send again</button></div>`;
+  $("result").innerHTML = `<div class="ended"><p>Nothing was shared: ${esc(reason)}</p><button type="button" id="send-again" class="smart-btn sm primary">Send again</button> <button type="button" id="new-test" class="smart-btn sm">New test</button></div>`;
   ($("send-again") as HTMLButtonElement).onclick = () => send();
+  ($("new-test") as HTMLButtonElement).onclick = () => clearResult();
   $("log").textContent = log;
   renderHistory();
 }
@@ -678,7 +691,7 @@ function show(r: Run) {
   const verdict = `<section class="verdict ${r.verdict}"><div class="head"><span class="mark">${mark}</span><b>${esc(r.headline)}</b></div>
     <div class="meta"><span>${esc(r.label)}</span><span>→ ${esc(r.walletName)}</span>${kb ? `<span>${kb}</span>` : ""}<span>${(r.ms / 1000).toFixed(1)} s</span><span>${new Date(r.at).toLocaleTimeString()}</span></div>
     ${r.message ? `<p class="small">${esc(r.message)}</p>` : ""}
-    <div class="actions"><a id="file" class="smart-btn sm primary" target="_blank" rel="noopener" href="${esc(resultLink(r))}">File this result</a><button type="button" class="smart-btn sm" data-act="download">Download run</button><a class="share-link" target="_blank" rel="noopener" href="${esc(shareLink("testing-ehr", r.verdict, r.at))}">Tell us how it went</a></div></section>`;
+    <div class="actions"><a id="file" class="smart-btn sm primary" target="_blank" rel="noopener" href="${esc(resultLink(r))}">File this result</a><button type="button" class="smart-btn sm" data-act="download">Download run</button><button type="button" class="smart-btn sm" data-act="new">New test</button><a class="share-link" target="_blank" rel="noopener" href="${esc(shareLink("testing-ehr", r.verdict, r.at))}">Tell us how it went</a></div></section>`;
 
   const failCard = (c: Check, warn = false) =>
     `<div class="failure smart-callout ${warn ? "warn" : "bad"}"><b>${warn ? "!" : "✕"} ${esc(c.title)}</b>${c.detail ? `<div class="got">${esc(c.detail)}</div>` : ""}${fixFor(c.id) ? `<div class="fix"><b>Fix:</b> ${esc(fixFor(c.id))}</div>` : ""}${c.section ? `<a href="${esc(c.section)}" target="_blank" rel="noopener">Spec ${esc(c.rule ?? "")}</a>` : ""}${layerFor(c.id) && r.wire ? ` <a href="#layer-${layerFor(c.id)}" data-goto-layer="${layerFor(c.id)}">See the bytes</a>` : ""}</div>`;
@@ -704,6 +717,7 @@ function show(r: Run) {
   $("result").innerHTML = verdict + expectHtml + failuresHtml + warningsHtml + passedHtml + (r.smartResponse ? itemsHtml(r) : "") + (r.wire?.layers ? wireHtml(r.wire, [...failures, ...warnings]) : "");
   $("log").textContent = r.log;
   $("result").querySelector('[data-act="download"]')?.addEventListener("click", () => download(r));
+  $("result").querySelector('[data-act="new"]')?.addEventListener("click", () => clearResult());
   if (r.wire?.layers) bindWire($("result"), r.wire, `${r.label} → ${r.walletName}`);
   for (const a of $("result").querySelectorAll<HTMLAnchorElement>("[data-goto-layer]")) a.addEventListener("click", (e) => {
     e.preventDefault();
