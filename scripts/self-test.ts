@@ -56,7 +56,7 @@ const ALL_RUNS: Run[] = [
   { name: "share-records with items unavailable or declined", caseId: "share-records", byUrl: true, status: { coverage: "unavailable", immunizations: "declined" } },
   { name: "share-records with nothing shared", caseId: "share-records", byUrl: true, status: { patient: "unavailable", problems: "declined", allergies: "unavailable", medications: "declined", immunizations: "declined", coverage: "unavailable" } },
   { name: "decline all (HOLD-4)", request: "records.json", declineAll: true, expectText: /declined/i },
-  { name: "wallet tab closed", request: "records.json", closeTab: true, expectText: /^Nothing was shared: the wallet tab was closed\.\s*Send again$/ },
+  { name: "wallet tab closed", request: "records.json", closeTab: true, expectText: /^Nothing was shared: the wallet tab was closed\.\s*Send again\s*New test$/ },
   // The Testing Wallet's response size setting: valid responses, only larger.
   { name: "size 512 KB", request: "records.json", size: "512k" },
   { name: "size 5 MB", request: "uscdi.json", size: "5m" },

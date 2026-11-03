@@ -558,7 +558,10 @@ async function run(input: { request: SmartCheckinRequest; label: string; caseId?
       const missed = result.expectations.filter((e) => e.outcome === "fail").length;
       if (missed) {
         result.verdict = "fail";
-        result.headline += `; ${tc.id}: ${missed} of ${result.expectations.length} expectation${result.expectations.length === 1 ? "" : "s"} not met`;
+        // Lead with what the test case wanted and what came back; the spec verdict follows.
+        const first = result.expectations.find((e) => e.outcome === "fail")!;
+        const more = missed > 1 ? ` (and ${missed - 1} more)` : "";
+        result.headline = `Test case ${tc.id} not met: ${first.title.replace(/\.$/, "")}${first.detail ? `, ${first.detail}` : ""}${more}. Spec: ${result.headline.charAt(0).toLowerCase()}${result.headline.slice(1)}`;
       }
     }
   } catch (e) {
@@ -641,6 +644,19 @@ function headlineFor(checks: Check[], rejected: boolean): string {
   if (fails.length) return `Response usable, ${fails.length} problem${fails.length === 1 ? "" : "s"} with items or records${w}`;
   const total = checks.filter((c) => c.outcome !== "info").length;
   return warns ? `Passed with ${warns} warning${warns === 1 ? "" : "s"}` : `All ${total} checks passed`;
+}
+
+/**
+ * The log, short enough for an issue link: GitHub fails on very long URLs,
+ * worse when signing in wraps the link in another. Passed checks become a
+ * list of ids; everything else stays whole. Download run has the full log.
+ */
+function evidenceFor(r: Run): string {
+  const lines = r.log.split("\n");
+  const passed = lines.filter((l) => /^\[(PASS|INFO)\] /.test(l)).map((l) => l.replace(/^\[\w+\] (\S+).*$/, "$1"));
+  const rest = lines.filter((l) => !/^\[(PASS|INFO)\] /.test(l));
+  const text = [...rest, ...(passed.length ? [`Passed or info (${passed.length}): ${passed.join(", ")}`] : [])].join("\n");
+  return text.length > 2500 ? text.slice(0, 2500) + "\n… (truncated; Download run has the full log)" : text;
 }
 
 function logFor(r: Run): string {
@@ -807,7 +823,7 @@ function resultLink(r: Run): string {
   const label = (id: string) => components.find((c) => c.id === id)?.label;
   const tc = catalog.find((t) => t.id === r.caseId);
   const result = r.verdict;
-  const log = r.log.length > 6000 ? r.log.slice(0, 6000) + "\n… (truncated)" : r.log;
+  const log = evidenceFor(r);
   const p = new URLSearchParams({
     template: "test-result.yml",
     title: `[result] ${tc?.id ?? "custom"} ${label(r.walletId)?.split(" (")[0] ?? r.walletName} ${result}`,
