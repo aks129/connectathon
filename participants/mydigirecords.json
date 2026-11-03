@@ -43,6 +43,20 @@
       "testPatient": "Emily Carter, born 1988 — synthetic test patient.",
       "notes": "1. Install and open the MyDigiRecords Health Wallet app.\n2. Accept the Terms and Conditions.\n3. On the login screen, tap **Try with demo account** to automatically sign in to the demo user.\n4. Once signed in, initiate the **EHR-initiated check-in flow** to test the SMART Health Check-in experience.\n\nUse the demo account and synthetic patient data for testing.",
       "requirements": "Android 10 or later with Chrome 141 or later"
+    },
+    {
+      "id": "mydigirecords-mydigirecords-health-wallet-ios",
+      "role": "native-wallet",
+      "name": "MyDigiRecords Health Wallet (iOS)",
+      "status": "up",
+      "platforms": [
+        "ios"
+      ],
+      "access": "invite",
+      "installUrl": "https://drive.google.com/file/d/1RYM2J1EoHiZlewejWSyAnJlrGCGbkUk9/view?usp=drive_link",
+      "description": "MyDigiRecords native ios health wallet for SMART Health Check-in, enabling patients to access their health information and share relevant records for check-in.",
+      "testPatient": "Emily Carter, born 1988 — synthetic test patient.",
+      "notes": "MyDigiRecords native iOS health wallet for SMART Health Check-in.\n\nInstallation instructions:\n1. Contact the MyDigiRecords team and share your iPhone's UDID.\n2. Wait for the team to register and whitelist your device.\n3. Once your device is approved, the team will provide the IPA installation link.\n4. Install and open the MyDigiRecords Health Wallet app.\n5. Accept the Terms and Conditions.\n6. On the login screen, tap \"Try with demo account\" to sign in.\n7. Initiate the EHR-initiated check-in flow to test the SMART Health Check-in experience.\n\nTest patient: Emily Carter, born 1988 (synthetic test patient)."
     }
   ]
 }
