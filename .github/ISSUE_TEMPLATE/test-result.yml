@@ -49,6 +49,7 @@ body:
         - "Comanage SMART Health Check-in (Healthcare Registries, LLC, comanage)"
         - "Example native Verifier app (SMART Health IT, smart-verifier-app)"
         - "Foo Medical (Medplum, medplum-foo-medical)"
+        - "RX Genie (FHIR IQ, fhir-iq-rxgenie)"
         - "Testing EHR (SMART Health IT, smart-testing-ehr)"
         - "Other (say which in the note)"
     validations:
